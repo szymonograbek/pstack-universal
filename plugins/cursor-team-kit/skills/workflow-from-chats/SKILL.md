@@ -5,6 +5,8 @@ description: Extract durable working preferences from recent Cursor chats and co
 
 # Workflow From Chats
 
+Outside Cursor, first read [the Claude Code runtime](../../runtime/claude-code.md) or [the Codex runtime](../../runtime/codex.md). It maps the Cursor tools, models, and paths this skill names.
+
 Infer durable working preferences from recent chats. Do not summarize chats; extract reusable workflow guidance.
 
 ## Scope

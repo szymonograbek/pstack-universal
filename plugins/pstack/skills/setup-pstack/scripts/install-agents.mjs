@@ -1,12 +1,11 @@
 #!/usr/bin/env node
 
 import { spawn } from "node:child_process";
-import { lstat, mkdir, readFile, realpath, rename, stat } from "node:fs/promises";
+import { lstat, mkdir, readdir, readFile, realpath, rename, stat } from "node:fs/promises";
 import { homedir } from "node:os";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-const agents = [{ name: "poteto-agent" }, { name: "comment-sicko" }];
 
 function isMissing(error) {
   return error !== null && typeof error === "object" && "code" in error && error.code === "ENOENT";
@@ -22,6 +21,9 @@ async function inspectPath(target) {
 }
 
 async function resolveSources(pluginRoot) {
+  const directory = path.join(path.resolve(pluginRoot), "codex", "agents");
+  const agents = (await readdir(directory)).filter(file => file.endsWith(".toml")).map(file => ({ name: file.slice(0, -5) }));
+  if (agents.length === 0) throw new Error(`No Codex agents in ${directory}`);
   return Promise.all(agents.map(async agent => {
     const configuredSource = path.join(path.resolve(pluginRoot), "codex", "agents", `${agent.name}.toml`);
     let source;

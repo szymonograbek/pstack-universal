@@ -9,6 +9,11 @@
       "name": "pstack",
       "source": "./plugins/pstack",
       "description": "if you want to go fast, go deep first. pstack helps you write less, but higher quality code. Original pstack by Lauren Tan (poteto)."
+    },
+    {
+      "name": "cursor-team-kit",
+      "source": "./plugins/cursor-team-kit",
+      "description": "CI, review, shipping, and UI/CLI verification workflows from cursor/plugins. pstack calls its deslop, control-ui, and control-cli skills."
     }
   ]
 }

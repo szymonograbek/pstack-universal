@@ -1,0 +1,19 @@
+{
+  "name": "cursor-team-kit",
+  "version": "1.2.0",
+  "description": "Internal engineering team workflows for CI, code review, shipping, control-cli, control-ui, verify-this, test reliability, code cleanup, and work summaries. From cursor/plugins, ported to Claude Code and Codex.",
+  "author": {
+    "name": "Eric Zakariasson"
+  },
+  "skills": "./skills/",
+  "license": "MIT",
+  "interface": {
+    "displayName": "Cursor Team Kit",
+    "shortDescription": "CI, review, shipping, and UI/CLI verification workflows",
+    "longDescription": "cursor-team-kit skills and agents from cursor/plugins: CI fixing, review, shipping, control-ui and control-cli verification harnesses, deslop, and work summaries. pstack calls several of them.",
+    "developerName": "Eric Zakariasson",
+    "category": "Productivity",
+    "capabilities": [],
+    "defaultPrompt": ["$cursor-team-kit:control-ui", "$cursor-team-kit:fix-ci"]
+  }
+}

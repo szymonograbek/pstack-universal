@@ -27,14 +27,17 @@ export function insertPointer(source) {
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
-  const root = fileURLToPath(new URL("../plugins/pstack/skills/", import.meta.url));
-  for (const name of skillsNeedingPointer(root)) {
-    const file = path.join(root, name, "SKILL.md");
-    const source = readFileSync(file, "utf8");
-    const updated = insertPointer(source);
-    if (updated !== source) {
-      writeFileSync(file, updated);
-      console.log(`Inserted the runtime pointer in skills/${name}/SKILL.md`);
+  const plugins = fileURLToPath(new URL("../plugins/", import.meta.url));
+  for (const plugin of readdirSync(plugins)) {
+    const root = path.join(plugins, plugin, "skills");
+    for (const name of skillsNeedingPointer(root)) {
+      const file = path.join(root, name, "SKILL.md");
+      const source = readFileSync(file, "utf8");
+      const updated = insertPointer(source);
+      if (updated !== source) {
+        writeFileSync(file, updated);
+        console.log(`Inserted the runtime pointer in ${plugin}/skills/${name}/SKILL.md`);
+      }
     }
   }
 }

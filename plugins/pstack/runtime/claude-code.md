@@ -2,7 +2,7 @@
 
 pstack's skills are written for Cursor. Their text stays as upstream wrote it. This file maps each Cursor tool, model, and path they name to its Claude Code equivalent. Apply the mapping silently and follow the skill otherwise as written.
 
-Bundled skills live at `../skills/<name>/SKILL.md` from this file and are invoked as `/pstack:<name>`. Every skill except `setup-pstack` has `disable-model-invocation: true`, so the `Skill` tool cannot load them. Read a routed skill's `SKILL.md` with the `Read` tool instead, as poteto-mode already does.
+This marketplace ships two plugins, `pstack` and `cursor-team-kit`, with identical copies of this file. A plugin's skills live at `../skills/<name>/SKILL.md` from this file and are invoked as `/<plugin>:<name>`. The `Skill` tool cannot load a skill with `disable-model-invocation: true`, which is every pstack skill except `setup-pstack`. Read a routed skill's `SKILL.md` with the `Read` tool instead, as poteto-mode already does.
 
 ## Subagents
 
@@ -12,6 +12,7 @@ Bundled skills live at `../skills/<name>/SKILL.md` from this file and are invoke
 | `subagent_type: generalPurpose` | `subagent_type: "general-purpose"` |
 | `subagent_type: "poteto-agent"` | `subagent_type: "pstack:poteto-agent"` |
 | `subagent_type: "comment-sicko"` | `subagent_type: "pstack:comment-sicko"` |
+| `subagent_type: "ci-watcher"`, `"thermo-nuclear-code-quality-review"` | `subagent_type: "cursor-team-kit:<name>"` |
 | `readonly: true` | `general-purpose` with "read-only: do not edit files or run mutating commands" in the brief. `Explore` replaces the system prompt, so don't substitute it. |
 | `readonly: false`, agent mode | `general-purpose`. MCP tools stay available either way. |
 | `run_in_background: true` | `run_in_background: true` |
@@ -19,7 +20,7 @@ Bundled skills live at `../skills/<name>/SKILL.md` from this file and are invoke
 | `model: <slug>` | `model` and `effort`, split per Models below |
 | Resume or message an agent | `SendMessage` to the agent's ID |
 
-Put the absolute path of `../skills/poteto-mode/SKILL.md` and of this file in every `pstack:poteto-agent` brief.
+Put the absolute paths of pstack's `skills/poteto-mode/SKILL.md` and of this file in every `pstack:poteto-agent` brief.
 
 ## Models
 
@@ -47,7 +48,7 @@ Claude Code offers one model family. Where a skill asks for a different family (
 |---|---|
 | `AskQuestion` | `AskUserQuestion` |
 | `create-skill` built-in | `plugin-dev:skill-development` when installed, else `skill-creator` |
-| `deslop`, `control-cli`, `control-ui` from `cursor-team-kit` | Same-named skill when one is installed. Without `deslop`, strip slop from the diff yourself. Without a control skill, drive the surface directly through Bash or a browser tool. |
+| A skill from `cursor-team-kit`, such as `deslop`, `control-cli`, or `control-ui` | `/cursor-team-kit:<name>`, from the plugin of that name in this marketplace. Without it, use a same-named installed skill. Without either, strip slop from the diff yourself, or drive the surface directly through Bash or a browser tool. |
 | Cursor's built-in babysit skill | None. The Babysit playbook stands alone. |
 | `/loop` | `/loop` |
 | Plan Mode | Plan mode |

@@ -1,0 +1,3 @@
+# Generated from cursor-team-kit/skills/pr-review-canvas/SKILL.md by scripts/build.mjs. Do not edit.
+policy:
+  allow_implicit_invocation: false

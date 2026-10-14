@@ -5,6 +5,8 @@ description: Review the current branch for bugs, intent fit, and test coverage; 
 
 # Review and ship
 
+Outside Cursor, first read [the Claude Code runtime](../../runtime/claude-code.md) or [the Codex runtime](../../runtime/codex.md). It maps the Cursor tools, models, and paths this skill names.
+
 ## Trigger
 
 Reviewing changes before shipping. Close key issues, verify behavior, and open or update a PR.

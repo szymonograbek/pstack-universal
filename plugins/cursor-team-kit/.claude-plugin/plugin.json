@@ -1,0 +1,12 @@
+{
+  "name": "cursor-team-kit",
+  "version": "1.2.0",
+  "description": "Internal engineering team workflows for CI, code review, shipping, control-cli, control-ui, verify-this, test reliability, code cleanup, and work summaries. From cursor/plugins, ported to Claude Code and Codex.",
+  "author": {
+    "name": "Eric Zakariasson"
+  },
+  "homepage": "https://github.com/szymonograbek/pstack-universal",
+  "repository": "https://github.com/szymonograbek/pstack-universal",
+  "license": "MIT",
+  "keywords": ["cursor-team-kit", "ci", "code-review", "shipping", "testing", "verification", "local-automation"]
+}

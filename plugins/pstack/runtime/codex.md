@@ -2,7 +2,7 @@
 
 pstack's skills are written for Cursor. Their text stays as upstream wrote it. This file maps each Cursor tool, model, and path they name to its Codex equivalent. Apply the mapping silently and follow the skill otherwise as written.
 
-Bundled skills live at `../skills/<name>/SKILL.md` from this file and are invoked as `$pstack:<name>`. Resolve another bundled skill by reading its `SKILL.md` from there, before looking for standalone installations. When writing a plan or a subagent brief, expand resource paths to absolute paths in the current installation.
+This marketplace ships two plugins, `pstack` and `cursor-team-kit`, with identical copies of this file. A plugin's skills live at `../skills/<name>/SKILL.md` from this file and are invoked as `$<plugin>:<name>`. Resolve a bundled skill by reading its `SKILL.md`, before looking for standalone installations. When writing a plan or a subagent brief, expand resource paths to absolute paths in the current installation.
 
 ## Subagents
 
@@ -12,13 +12,14 @@ Bundled skills live at `../skills/<name>/SKILL.md` from this file and are invoke
 | `subagent_type: generalPurpose` | The default agent |
 | `subagent_type: "poteto-agent"` | The registered `poteto-agent` custom agent |
 | `subagent_type: "comment-sicko"` | The registered `comment-sicko` custom agent |
+| `subagent_type: "ci-watcher"`, `"thermo-nuclear-code-quality-review"` | The registered custom agent of that name |
 | `readonly: true` | The default agent with "read-only: do not edit files or run mutating commands" in the brief |
 | `readonly: false`, agent mode | The default agent |
 | `run_in_background: true` | Spawn, keep working, and wait only when the result is needed |
 | `environment: "cloud"` | No cloud agents. Run locally, in a separate worktree when the worker writes. |
 | `model: <slug>` | `model` and `reasoning_effort`, split per Models below |
 
-`/pstack:setup-pstack` registers `poteto-agent` and `comment-sicko` in `${CODEX_HOME:-$HOME/.codex}/config.toml`. If the runtime does not expose a role a skill names, say that setup and a new session are required. Do not present a default agent as the registered role. Put the absolute path of `../skills/poteto-mode/SKILL.md` and of this file in every `poteto-agent` brief.
+`$pstack:setup-pstack` registers both plugins' custom agents in `${CODEX_HOME:-$HOME/.codex}/config.toml`. If the runtime does not expose a role a skill names, say that setup and a new session are required. Do not present a default agent as the registered role. Put the absolute paths of pstack's `skills/poteto-mode/SKILL.md` and of this file in every `poteto-agent` brief.
 
 Give each child its goal, scope, constraints, resource paths, and completion criteria. When the spawn tool needs a fresh context to override a model, spawn a fresh child with the complete brief. Batch work within the runtime's agent limit. A panel size in a skill does not raise that limit.
 
@@ -42,13 +43,14 @@ Four-agent design and adversarial review panels use one Astra and three Sol agen
 
 `$pstack:setup-pstack` follows its steps with these changes. Step 1 detects OpenAI models and the reasoning efforts each supports, and every value is a `model/effort` pair. Step 3 offers the budget for Sol only, per Models. Step 5 writes or replaces only the `## pstack model configuration` section of `~/.codex/AGENTS.md`, with the role lines and the `# budget` line but no `.mdc` frontmatter, and keeps the rest of the file.
 
-Then register the custom agents from a persistent checkout of this repository, not the versioned plugin cache, which an update deletes. Accept a checkout path from the user, or find an existing checkout whose Git remote is this plugin's repository. Otherwise ask where to clone it. Run the bundled installer with the absolute checkout path and the active Codex executable (`command -v codex`):
+Then register the custom agents from a persistent checkout of this repository, not the versioned plugin cache, which an update deletes. Accept a checkout path from the user, or find an existing checkout whose Git remote is this plugin's repository. Otherwise ask where to clone it. Run the bundled installer once per plugin, with absolute paths and the active Codex executable (`command -v codex`):
 
 ```sh
 node <checkout>/plugins/pstack/skills/setup-pstack/scripts/install-agents.mjs <checkout>/plugins/pstack <codex-binary>
+node <checkout>/plugins/pstack/skills/setup-pstack/scripts/install-agents.mjs <checkout>/plugins/cursor-team-kit <codex-binary>
 ```
 
-It registers `poteto-agent` and `comment-sicko` in `${CODEX_HOME:-$HOME/.codex}/config.toml`, pointing at the checkout's generated `codex/agents/*.toml`. It refuses to replace a registration that points elsewhere, such as an older pstack port. Name the conflicting path and ask before rerunning with `--replace`. Then tell the user to start a new session and launch each role once. Registration alone does not prove that dispatch works.
+It registers `poteto-agent`, `comment-sicko`, `ci-watcher`, and `thermo-nuclear-code-quality-review` in `${CODEX_HOME:-$HOME/.codex}/config.toml`, pointing at the checkout's generated `codex/agents/*.toml`. It refuses to replace a registration that points elsewhere, such as an older pstack port. Name the conflicting path and ask before rerunning with `--replace`. Then tell the user to start a new session and launch each role once. Registration alone does not prove that dispatch works.
 
 ## Other Cursor features
 
@@ -56,7 +58,7 @@ It registers `poteto-agent` and `comment-sicko` in `${CODEX_HOME:-$HOME/.codex}/
 |---|---|
 | `AskQuestion` | The structured user-input tool when the session exposes it, else a plain question |
 | `create-skill` built-in | `skill-creator` |
-| `deslop`, `control-cli`, `control-ui` from `cursor-team-kit` | Same-named skill when one is installed. Without `deslop`, strip slop from the diff yourself. Without a control skill, drive the surface directly through the shell or a browser tool. |
+| A skill from `cursor-team-kit`, such as `deslop`, `control-cli`, or `control-ui` | `$cursor-team-kit:<name>`, from the plugin of that name in this marketplace. Without it, use a same-named installed skill. Without either, strip slop from the diff yourself, or drive the surface directly through the shell or a browser tool. |
 | Cursor's built-in babysit skill | None. The Babysit playbook stands alone. |
 | `/loop` | No built-in. Keep the run going in this turn, or use the runtime's goal or recurring-task mechanism only when the user has asked for that lifecycle. |
 | Plan Mode | Plan mode |
