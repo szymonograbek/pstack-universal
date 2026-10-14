@@ -1,0 +1,3 @@
+# Generated from skills/principle-explain-the-number/SKILL.md by scripts/build-codex.mjs. Do not edit.
+policy:
+  allow_implicit_invocation: false

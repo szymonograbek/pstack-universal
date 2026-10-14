@@ -1,0 +1,3 @@
+# Generated from skills/principle-make-operations-idempotent/SKILL.md by scripts/build-codex.mjs. Do not edit.
+policy:
+  allow_implicit_invocation: false
