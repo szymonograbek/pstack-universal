@@ -1,0 +1,28 @@
+{
+  "description": "Keep an explicitly invoked Poteto Mode active for its session, across compaction and resume.",
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"${CLAUDE_PLUGIN_ROOT}/hooks/poteto-mode.mjs\"",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "matcher": "resume|compact",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"${CLAUDE_PLUGIN_ROOT}/hooks/poteto-mode.mjs\"",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  }
+}
