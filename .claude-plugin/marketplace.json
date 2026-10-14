@@ -1,0 +1,14 @@
+{
+  "name": "pstack-universal",
+  "owner": {
+    "name": "Szymon Ograbek"
+  },
+  "description": "poteto's pstack for Claude Code and Codex, kept as close to upstream as the harnesses allow.",
+  "plugins": [
+    {
+      "name": "pstack",
+      "source": "./plugins/pstack",
+      "description": "if you want to go fast, go deep first. pstack helps you write less, but higher quality code. Original pstack by Lauren Tan (poteto)."
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "name": "pstack",
+  "version": "0.15.24",
+  "description": "if you want to go fast, go deep first. pstack helps you write less, but higher quality code. Original pstack by Lauren Tan (poteto), ported to Claude Code and Codex.",
+  "author": {
+    "name": "Lauren Tan"
+  },
+  "skills": "./skills/",
+  "license": "MIT",
+  "interface": {
+    "displayName": "pstack",
+    "shortDescription": "poteto's agent workflows",
+    "longDescription": "pstack skills, playbooks, and agent prompts from cursor/plugins, with a Codex runtime map and session hooks that keep Poteto Mode active across compaction.",
+    "developerName": "Lauren Tan",
+    "category": "Productivity",
+    "capabilities": [],
+    "defaultPrompt": ["$pstack:poteto-mode", "$pstack:setup-pstack"]
+  }
+}
