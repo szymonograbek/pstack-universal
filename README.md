@@ -16,7 +16,7 @@ The skills, playbooks, and agent prompts are upstream's files. Each harness gets
 /plugin install cursor-team-kit@pstack-universal
 ```
 
-The plugins install their custom agents: `pstack:poteto-agent`, `pstack:comment-sicko`, `cursor-team-kit:ci-watcher`, and `cursor-team-kit:thermo-nuclear-code-quality-review`. Run `/pstack:setup-pstack` to choose a model per role. If another pstack port is installed, disable it first. Both register as `pstack`.
+The plugins install their custom agents: `pstack:poteto-agent`, `pstack:comment-sicko`, `cursor-team-kit:ci-watcher`, and `cursor-team-kit:thermo-nuclear-code-quality-review`. Run `/pstack:setup-pstack` to choose a model per role. It asks for your Claude plan (Pro, Max 5x, or Max 20x) and starts from that plan's defaults in [`runtime/claude-code.md`](plugins/pstack/runtime/claude-code.md). Upstream assumes unlimited inference and runs every role at `xhigh`, which only Max 20x keeps. Without setup, pstack uses the Max 5x defaults. If another pstack port is installed, disable it first. Both register as `pstack`.
 
 ### Codex
 

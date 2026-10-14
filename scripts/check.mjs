@@ -72,6 +72,27 @@ function checkFiles(plugin, name) {
   }
 }
 
+// The Claude Code Plans table must cover exactly the roles upstream's setup-pstack writes, within each plan's ceiling.
+const roles = readFileSync(path.join(repo, "plugins/pstack/skills/setup-pstack/SKILL.md"), "utf8")
+  .match(/^# budget: .*\n([\s\S]*?)\n```/m)[1]
+  .split("\n")
+  .map(line => line.slice(0, line.indexOf(":")));
+const efforts = ["low", "medium", "high", "xhigh", "max"];
+const plans = readFileSync(path.join(repo, "plugins/pstack/runtime/claude-code.md"), "utf8").match(/^### Plans\n\n([\s\S]*?)\n\n/m)[1];
+const rows = plans.split("\n").slice(2).map(row => row.split("|").slice(1, -1).map(cell => cell.trim().replaceAll("`", "")));
+const ceilings = rows.find(([label]) => label === "Effort ceiling").slice(1);
+const planRoles = rows.filter(([label]) => label !== "Effort ceiling");
+check(JSON.stringify(planRoles.map(([label]) => label)) === JSON.stringify(roles), `Plans table roles ${planRoles.map(([l]) => l)} must match setup-pstack roles ${roles}`);
+for (const [label, ...cells] of planRoles) {
+  cells.forEach((cell, column) => {
+    for (const pair of cell.split(", ")) {
+      const [model, effort] = pair.split("/");
+      check(["fable", "opus", "sonnet", "haiku"].includes(model) && efforts.includes(effort), `Plans ${label}: bad pair ${pair}`);
+      check(efforts.indexOf(effort) <= efforts.indexOf(ceilings[column]), `Plans ${label}: ${pair} exceeds the ${ceilings[column]} ceiling`);
+    }
+  });
+}
+
 const hooks = json("plugins/pstack/hooks/hooks.json");
 check(JSON.stringify(Object.keys(hooks.hooks).sort()) === '["SessionStart","UserPromptSubmit"]', "hook events");
 for (const entry of Object.values(hooks.hooks)
