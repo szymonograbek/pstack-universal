@@ -1,0 +1,12 @@
+{
+  "name": "pstack-universal",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/*.test.mjs",
+    "check": "node scripts/check.mjs",
+    "build": "node scripts/runtime-pointer.mjs && node scripts/build-codex.mjs",
+    "sync": "node scripts/sync-upstream.mjs",
+    "sync:status": "node scripts/sync-upstream.mjs --status"
+  }
+}
