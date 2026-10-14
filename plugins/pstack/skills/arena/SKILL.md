@@ -6,6 +6,8 @@ disable-model-invocation: true
 
 # Arena
 
+Outside Cursor, first read [the Claude Code runtime](../../runtime/claude-code.md) or [the Codex runtime](../../runtime/codex.md). It maps the Cursor tools, models, and paths this skill names.
+
 Open a todolist with one entry per phase (Frame, Fan out, Cross-judge, Pick, Graft, Verify) before launching anything.
 
 ## Phase A: Frame

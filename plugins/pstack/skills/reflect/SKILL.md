@@ -6,6 +6,8 @@ disable-model-invocation: true
 
 # Reflect
 
+Outside Cursor, first read [the Claude Code runtime](../../runtime/claude-code.md) or [the Codex runtime](../../runtime/codex.md). It maps the Cursor tools, models, and paths this skill names.
+
 Mine the current conversation for durable learnings, then route them into skill edits.
 
 Invoke when the user says "reflect" or "/reflect". Skip when the conversation is trivial, off-topic, or already covered by an existing skill the parent followed correctly. One-offs are not learnings.

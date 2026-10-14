@@ -6,6 +6,8 @@ disable-model-invocation: true
 
 # Show me your work
 
+Outside Cursor, first read [the Claude Code runtime](../../runtime/claude-code.md) or [the Codex runtime](../../runtime/codex.md). It maps the Cursor tools, models, and paths this skill names.
+
 Keep one canonical log.
 
 ## The format
