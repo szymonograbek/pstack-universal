@@ -1,6 +1,6 @@
 {
   "name": "pstack",
-  "version": "0.15.24",
+  "version": "0.15.25",
   "description": "if you want to go fast, go deep first. pstack helps you write less, but higher quality code. Original pstack by Lauren Tan (poteto), ported to Claude Code and Codex.",
   "author": {
     "name": "Lauren Tan"
